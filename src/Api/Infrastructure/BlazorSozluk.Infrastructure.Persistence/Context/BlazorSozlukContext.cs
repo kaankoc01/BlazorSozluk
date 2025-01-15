@@ -12,6 +12,11 @@ namespace BlazorSozluk.Infrastructure.Persistence.Context
 
         }
 
+        public BlazorSozlukContext()
+        {
+            
+        }
+
 
         public DbSet<User> Users { get; set; }
         public DbSet<Entry> Entries { get; set; }
@@ -21,6 +26,18 @@ namespace BlazorSozluk.Infrastructure.Persistence.Context
         public DbSet<EntryCommentVote> EntryCommentVotes { get; set; }
         public DbSet<EntryCommentFavorite> EntryCommentFavorites { get; set; }
         public DbSet<EmailConfirmation> EmailConfirmations { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                var connStr = "server =.\\SQLEXPRESS; Initial Catalog =blazorSozluk;Integrated Security=true;TrustServerCertificate=true;";
+                optionsBuilder.UseSqlServer(connStr, opt =>
+                {
+                    opt.EnableRetryOnFailure();
+                });
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
