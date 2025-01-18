@@ -7,7 +7,7 @@ using BlazorSozluk.Common.Models.RequestModels;
 using FluentValidation;
 using FluentValidation.Validators;
 
-namespace BlazorSozluk.Api.Application.Features.Commands.User
+namespace BlazorSozluk.Api.Application.Features.Commands.User.Login
 {
     public class LoginUserCommandValidator : AbstractValidator<LoginUserCommand>
     {

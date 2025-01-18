@@ -11,15 +11,15 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace BlazorSozluk.Api.Application.Features.Commands.User
+namespace BlazorSozluk.Api.Application.Features.Commands.User.Login
 {
-    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand,LoginUserViewModel>
+    public class LoginUserCommandHandler : IRequestHandler<LoginUserCommand, LoginUserViewModel>
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
 
-        public LoginUserCommandHandler(IUserRepository userRepository , IMapper mapper , IConfiguration configuration)
+        public LoginUserCommandHandler(IUserRepository userRepository, IMapper mapper, IConfiguration configuration)
         {
             _userRepository = userRepository;
             _mapper = mapper;
