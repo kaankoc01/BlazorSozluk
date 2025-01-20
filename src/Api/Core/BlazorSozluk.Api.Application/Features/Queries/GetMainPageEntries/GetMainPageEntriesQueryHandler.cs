@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BlazorSozluk.Api.Application.Interfaces.Repositories;
+﻿using BlazorSozluk.Api.Application.Interfaces.Repositories;
 using BlazorSozluk.Common.Infrastructure.Extensions;
 using BlazorSozluk.Common.Models.Page;
 using BlazorSozluk.Common.Models.Queries;
@@ -41,7 +40,7 @@ namespace BlazorSozluk.Api.Application.Features.Queries.GetMainPageEntries
             });
             var entries = await list.GetPaged(request.Page, request.PageSize);
 
-            return new PagedViewModel<GetEntryDetailViewModel>(entries.Results, entries.PageInfo);
+            return entries;
 
 
         }
