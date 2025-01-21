@@ -1,6 +1,6 @@
 ﻿namespace BlazorSozluk.Common.Models.Queries
 {
-    public class GetEntryCommentViewModel : BaseFooterRateFavoritedViewModel
+    public class GetEntryCommentsViewModel : BaseFooterRateFavoritedViewModel
     {
         public Guid Id { get; set; }
         public string Content { get; set; }

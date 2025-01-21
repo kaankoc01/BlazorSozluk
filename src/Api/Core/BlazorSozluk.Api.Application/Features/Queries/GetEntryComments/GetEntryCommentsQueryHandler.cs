@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlazorSozluk.Api.Application.Features.Queries.GetEntryComments
 {
-    public class GetEntryCommentsQueryHandler : IRequestHandler<GetEntryCommentsQuery , PagedViewModel<GetEntryCommentViewModel>>
+    public class GetEntryCommentsQueryHandler : IRequestHandler<GetEntryCommentsQuery , PagedViewModel<GetEntryCommentsViewModel>>
     {
         private readonly IEntryCommentRepository entryCommentRepository;
 
@@ -26,7 +26,7 @@ namespace BlazorSozluk.Api.Application.Features.Queries.GetEntryComments
         {
             
         }
-        public async Task<PagedViewModel<GetEntryCommentViewModel>> Handle(GetEntryCommentsQuery request, CancellationToken cancellationToken)
+        public async Task<PagedViewModel<GetEntryCommentsViewModel>> Handle(GetEntryCommentsQuery request, CancellationToken cancellationToken)
         {
 
             var query = entryCommentRepository.AsQueryable();
@@ -36,7 +36,7 @@ namespace BlazorSozluk.Api.Application.Features.Queries.GetEntryComments
                 .Include(i => i.EntryCommentVotes)
                 .Where(i => i.EntryId == request.EntryId);
 
-            var list = query.Select(i => new GetEntryCommentViewModel()
+            var list = query.Select(i => new GetEntryCommentsViewModel()
             {
                 Id = i.Id,
                 Content = i.Content,

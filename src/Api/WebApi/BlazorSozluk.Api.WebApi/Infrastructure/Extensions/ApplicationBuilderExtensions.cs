@@ -12,23 +12,27 @@ namespace BlazorSozluk.Api.WebApi.Infrastructure.Extensions
             bool useDefaultHandLingResponse = true,
             Func<HttpContext, Exception, Task> handleException = null)
         {
-            app.Run(context =>
+            app.UseExceptionHandler(optios  =>
             {
-                var exceptionObject = context.Features.Get<IExceptionHandlerFeature>();
-                if (!useDefaultHandLingResponse && handleException == null)
-                    throw new ArgumentNullException(nameof(handleException),
-                        $"{nameof(handleException)} cannot be null when {nameof(useDefaultHandLingResponse)} is false");
+                optios.Run(context =>
+                {
+                    var exceptionObject = context.Features.Get<IExceptionHandlerFeature>();
+                    if (!useDefaultHandLingResponse && handleException == null)
+                        throw new ArgumentNullException(nameof(handleException),
+                            $"{nameof(handleException)} cannot be null when {nameof(useDefaultHandLingResponse)} is false");
 
-                if (!useDefaultHandLingResponse && handleException != null)
-                    return handleException(context, exceptionObject.Error);
+                    if (!useDefaultHandLingResponse && handleException != null)
+                        return handleException(context, exceptionObject.Error);
 
-                return DefaultHandleException(context, exceptionObject.Error, includeExceptionDetails);
+                    return DefaultHandleException(context, exceptionObject.Error, includeExceptionDetails);
+                });
             });
+
 
             return app;
         }
 
-        private static async Task DefaultHandleException(HttpContext context , Exception exception, bool includeExceptionDetails)
+        private static async Task DefaultHandleException(HttpContext context, Exception exception, bool includeExceptionDetails)
         {
             HttpStatusCode statusCode = HttpStatusCode.InternalServerError;
             string message = "Internal Server Error Occured!";
@@ -53,7 +57,7 @@ namespace BlazorSozluk.Api.WebApi.Infrastructure.Extensions
             await WriteResponse(context, statusCode, res);
         }
 
-        private static async Task WriteResponse(HttpContext context , HttpStatusCode statusCode, object responseObject)
+        private static async Task WriteResponse(HttpContext context, HttpStatusCode statusCode, object responseObject)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)statusCode;
