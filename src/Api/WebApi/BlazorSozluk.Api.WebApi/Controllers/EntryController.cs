@@ -14,6 +14,7 @@ namespace BlazorSozluk.Api.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class EntryController : BaseController
     {
         private readonly IMediator mediator;
@@ -51,6 +52,7 @@ namespace BlazorSozluk.Api.WebApi.Controllers
 
         [HttpGet]
         [Route("UserEntries")]
+        [Authorize]
         public async Task<IActionResult> GetUserEntries(string userName , Guid userId , int page, int pageSize)
         {
             if (userId == Guid.Empty && string.IsNullOrEmpty(userName))

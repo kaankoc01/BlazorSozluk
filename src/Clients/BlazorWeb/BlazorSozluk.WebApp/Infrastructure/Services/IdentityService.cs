@@ -6,7 +6,9 @@ using BlazorSozluk.WebApp.Infrastructure.Services.Interfaces;
 using System.Net.Http.Json;
 using System.Text.Json;
 using Blazored.LocalStorage;
+using BlazorSozluk.WebApp.Infrastructure.Auth;
 using BlazorSozluk.WebApp.Infrastructure.Extension;
+using Microsoft.AspNetCore.Components.Authorization;
 
 
 namespace BlazorSozluk.WebApp.Infrastructure.Services
@@ -20,14 +22,14 @@ namespace BlazorSozluk.WebApp.Infrastructure.Services
 
         private readonly HttpClient httpClient;
         private readonly ISyncLocalStorageService syncLocalStorageService;
-        //private readonly AuthenticationStateProvider authenticationStateProvider;
+        private readonly AuthenticationStateProvider authenticationStateProvider;
 
 
-        public IdentityService(HttpClient httpClient, ISyncLocalStorageService syncLocalStorageService/* AuthenticationStateProvider authenticationStateProvider*/)
+        public IdentityService(HttpClient httpClient, ISyncLocalStorageService syncLocalStorageService, AuthenticationStateProvider authenticationStateProvider)
         {
             this.httpClient = httpClient;
             this.syncLocalStorageService = syncLocalStorageService;
-            //this.authenticationStateProvider = authenticationStateProvider;
+            this.authenticationStateProvider = authenticationStateProvider;
         }
 
 
@@ -76,8 +78,8 @@ namespace BlazorSozluk.WebApp.Infrastructure.Services
                 syncLocalStorageService.SetUsername(response.UserName);
                 syncLocalStorageService.SetUserId(response.Id);
 
-                // bu geri açılacak.
-                //((AuthStateProvider)authenticationStateProvider).NotifyUserLogin(response.UserName, response.Id);
+                
+                ((AuthStateProvider)authenticationStateProvider).NotifyUserLogin(response.UserName, response.Id);
 
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", response.Token);
 
@@ -93,7 +95,7 @@ namespace BlazorSozluk.WebApp.Infrastructure.Services
             syncLocalStorageService.RemoveItem(LocalStorageExtension.UserName);
             syncLocalStorageService.RemoveItem(LocalStorageExtension.UserId);
 
-            //((AuthStateProvider)authenticationStateProvider).NotifyUserLogout();
+            ((AuthStateProvider)authenticationStateProvider).NotifyUserLogout();
             httpClient.DefaultRequestHeaders.Authorization = null;
         }
     }
