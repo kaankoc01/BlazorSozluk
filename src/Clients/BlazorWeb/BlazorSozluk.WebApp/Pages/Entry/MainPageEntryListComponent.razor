@@ -6,12 +6,12 @@
         <br />
     }
 
-    @* <br />
+     <br />
 <br />
 <PaginationComponent TotalPage="@entries.PageInfo.TotalPageCount"
                      CurrentPage="@currentPage"
-                     OnPageChanged="@OnPageChanged" />
-*@
+                     OnPageChanged="@OnPageChanged" /> 
+
 }
 
 
@@ -23,11 +23,11 @@
 
     PagedViewModel<GetEntryDetailViewModel> entries;
 
-    // public async Task OnPageChanged(int pageNumber)
-    // {
-    //     currentPage = pageNumber;
-    //     entries = await entryService.GetMainPageEntries(currentPage, 5);
-    // }
+    public async Task OnPageChanged(int pageNumber)
+    {
+        currentPage = pageNumber;
+        entries = await entryService.GetMainPageEntries(currentPage, 5);
+    }
 
     protected override async Task OnInitializedAsync()
     {
