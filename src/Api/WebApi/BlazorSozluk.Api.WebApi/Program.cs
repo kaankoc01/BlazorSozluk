@@ -25,12 +25,16 @@ builder.Services.AddApplicationRegistration();
 builder.Services.AddInfrastructureRegistration(builder.Configuration);
 builder.Services.ConfigureAuth(builder.Configuration);
 // add cors
-builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-{ 
-    builder.AllowAnyOrigin()
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyPolicy", policy =>
+    {
+        policy.WithOrigins("https://localhost:7085") // Frontend URL'sini burada belirtin
+            .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowAnyHeader();
-}));
+            .AllowCredentials(); // Kimlik doðrulama bilgilerine izin verir
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -44,10 +48,13 @@ app.UseHttpsRedirection();
 
 app.ConfigureExceptionHandling(app.Environment.IsDevelopment());
 
+app.UseCors("MyPolicy");
+
 app.UseAuthentication();
+
 app.UseAuthorization();
 
-app.UseCors("MyPolicy");
+
 app.MapControllers();
 
 app.Run();

@@ -33,14 +33,16 @@
 </div>
 
 @code {
+
     [Inject]
     IIdentityService identityService { get; set; }
+
     [Inject]
     NavigationManager navigationManager { get; set; }
 
-    private LoginUserCommand loginCommand = new();
-
     private string errorText = "";
+
+    private LoginUserCommand loginCommand = new();
 
     public async Task LoginProcess()
     {
@@ -55,13 +57,12 @@
             }
             else
             {
-                errorText = "Login Failed With unknow reasons"; 
+                errorText = "Login failed with unknow reasons";
             }
         }
         catch (Exception ex)
         {
             errorText = ex.Message;
-            
         }
     }
 }

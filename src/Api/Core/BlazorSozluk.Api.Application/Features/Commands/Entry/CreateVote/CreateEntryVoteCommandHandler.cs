@@ -1,17 +1,12 @@
-﻿using BlazorSozluk.Common.Infrastructure;
-using BlazorSozluk.Common;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlazorSozluk.Common.Models.RequestModels;
+﻿using BlazorSozluk.Common;
 using BlazorSozluk.Common.Events.Entry;
+using BlazorSozluk.Common.Infrastructure;
+using BlazorSozluk.Common.Models.RequestModels;
+using MediatR;
 
 namespace BlazorSozluk.Api.Application.Features.Commands.Entry.CreateVote
 {
-    internal class CreateEntryVoteCommandHandler : IRequestHandler<CreateEntryVoteCommand, bool>
+    public class CreateEntryVoteCommandHandler : IRequestHandler<CreateEntryVoteCommand, bool>
     {
         public async Task<bool> Handle(CreateEntryVoteCommand request, CancellationToken cancellationToken)
         {

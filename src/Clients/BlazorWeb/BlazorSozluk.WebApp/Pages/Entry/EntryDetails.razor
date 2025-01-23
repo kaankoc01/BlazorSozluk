@@ -1,6 +1,5 @@
 ﻿@page "/entry/{id:guid}"
 
-
 @if (entry is not null)
 {
     <EntryViewerComponent Entry="@entry" />
@@ -41,7 +40,8 @@
 
     [Inject]
     IEntryService entryService { get; set; }
-     
+
+
     private GetEntryDetailViewModel entry = new();
     private PagedViewModel<GetEntryCommentsViewModel> comments = new();
     private int currentPage = 1;

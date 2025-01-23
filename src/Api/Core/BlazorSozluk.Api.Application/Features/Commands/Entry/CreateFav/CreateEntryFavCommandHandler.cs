@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BlazorSozluk.Api.Application.Features.Commands.Entry.CreateFav
 {
-    internal class CreateEntryFavCommandHandler : IRequestHandler<CreateEntryFavCommand, bool>
+    public class CreateEntryFavCommandHandler : IRequestHandler<CreateEntryFavCommand, bool>
     {
 
         public Task<bool> Handle(CreateEntryFavCommand request, CancellationToken cancellationToken)

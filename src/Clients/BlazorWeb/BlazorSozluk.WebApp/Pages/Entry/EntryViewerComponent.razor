@@ -1,4 +1,5 @@
-﻿@if (Entry != null)
+﻿@using BlazorSozluk.WebApp.Infrastructure.Models
+@if (Entry != null)
 {
 
     <div class="card border-0">
@@ -11,22 +12,22 @@
             @if (MyEntries)
             {
                 <EntryFooterFavoriteComponent EntryId="@Entry.Id"
-                                      OnFavClicked="@OnFavClicked"
-                                      FavoritedCount="@Entry.FavoritedCount"
-                                      IsFavorited="@Entry.IsFavorited" />
+                                              OnFavClicked="@OnFavClicked"
+                                              FavoritedCount="@Entry.FavoritedCount"
+                                              IsFavorited="@Entry.IsFavorited" />
             }
             else
             {
                 <EntryFooterRateFavoriteComponent EntryId="@Entry.Id"
-                                          OnFavClicked="@OnFavClicked"
-                                          OnVoteClicked="@OnVoteClicked"
-                                          Vote="@Entry.VoteType"
-                                          FavoritedCount="@Entry.FavoritedCount"
-                                          IsFavorited="@Entry.IsFavorited" />
+                                                  OnFavClicked="@OnFavClicked"
+                                                  OnVoteClicked="@OnVoteClicked"
+                                                  Vote="@Entry.VoteType"
+                                                  FavoritedCount="@Entry.FavoritedCount"
+                                                  IsFavorited="@Entry.IsFavorited" />
             }
 
             <EntryFooterAuthorComponent UserName="@Entry.CreatedByUserName"
-                                    CreateDate="@Entry.CreatedDate" />
+                                        CreateDate="@Entry.CreatedDate" />
 
         </div>
     </div>
