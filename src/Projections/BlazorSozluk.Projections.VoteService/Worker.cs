@@ -32,36 +32,36 @@ namespace BlazorSozluk.Projections.VoteService
                 })
                 .StartConsuming(SozlukConstants.CreateEntryVoteQueueName);
 
-            //QueueFactory.CreateBasicConsumer()
-            //    .EnsureExchange(SozlukConstants.VoteExchangeName)
-            //    .EnsureQueue(SozlukConstants.DeleteEntryVoteQueueName, SozlukConstants.VoteExchangeName)
-            //    .Receive<DeleteEntryVoteEvent>(vote =>
-            //    {
-            //        voteService.DeleteEntryVote(vote.EntryId, vote.CreatedBy).GetAwaiter().GetResult();
-            //        logger.LogInformation("Delete Entry Received EntryId: {0}", vote.EntryId);
-            //    })
-            //    .StartConsuming(SozlukConstants.DeleteEntryVoteQueueName);
+            QueueFactory.CreateBasicConsumer()
+                .EnsureExchange(SozlukConstants.VoteExchangeName)
+                .EnsureQueue(SozlukConstants.DeleteEntryVoteQueueName, SozlukConstants.VoteExchangeName)
+                .Receive<DeleteEntryVoteEvent>(vote =>
+                {
+                    voteService.DeleteEntryVote(vote.EntryId, vote.CreatedBy).GetAwaiter().GetResult();
+                    logger.LogInformation("Delete Entry Received EntryId: {0}", vote.EntryId);
+                })
+                .StartConsuming(SozlukConstants.DeleteEntryVoteQueueName);
 
 
-            //QueueFactory.CreateBasicConsumer()
-            //        .EnsureExchange(SozlukConstants.VoteExchangeName)
-            //        .EnsureQueue(SozlukConstants.CreateEntryCommentVoteQueueName, SozlukConstants.VoteExchangeName)
-            //        .Receive<CreateEntryCommentVoteEvent>(vote =>
-            //        {
-            //            voteService.CreateEntryCommentVote(vote).GetAwaiter().GetResult();
-            //            logger.LogInformation("Create Entry Comment Received EntryCommentId: {0}, VoteType: {1}", vote.EntryCommentId, vote.VoteType);
-            //        })
-            //        .StartConsuming(SozlukConstants.CreateEntryCommentVoteQueueName);
+            QueueFactory.CreateBasicConsumer()
+                    .EnsureExchange(SozlukConstants.VoteExchangeName)
+                    .EnsureQueue(SozlukConstants.CreateEntryCommentVoteQueueName, SozlukConstants.VoteExchangeName)
+                    .Receive<CreateEntryCommentVoteEvent>(vote =>
+                    {
+                        voteService.CreateEntryCommentVote(vote).GetAwaiter().GetResult();
+                        logger.LogInformation("Create Entry Comment Received EntryCommentId: {0}, VoteType: {1}", vote.EntryCommentId, vote.VoteType);
+                    })
+                    .StartConsuming(SozlukConstants.CreateEntryCommentVoteQueueName);
 
-            //QueueFactory.CreateBasicConsumer()
-            //        .EnsureExchange(SozlukConstants.VoteExchangeName)
-            //        .EnsureQueue(SozlukConstants.DeleteEntryCommentVoteQueueName, SozlukConstants.VoteExchangeName)
-            //        .Receive<DeleteEntryCommentVoteEvent>(vote =>
-            //        {
-            //            voteService.DeleteEntryCommentVote(vote.EntryCommentId, vote.CreatedBy).GetAwaiter().GetResult();
-            //            logger.LogInformation("Delete Entry Comment Received EntryCommentId: {0}", vote.EntryCommentId);
-            //        })
-            //        .StartConsuming(SozlukConstants.DeleteEntryCommentVoteQueueName);
+            QueueFactory.CreateBasicConsumer()
+                    .EnsureExchange(SozlukConstants.VoteExchangeName)
+                    .EnsureQueue(SozlukConstants.DeleteEntryCommentVoteQueueName, SozlukConstants.VoteExchangeName)
+                    .Receive<DeleteEntryCommentVoteEvent>(vote =>
+                    {
+                        voteService.DeleteEntryCommentVote(vote.EntryCommentId, vote.CreatedBy).GetAwaiter().GetResult();
+                        logger.LogInformation("Delete Entry Comment Received EntryCommentId: {0}", vote.EntryCommentId);
+                    })
+                    .StartConsuming(SozlukConstants.DeleteEntryCommentVoteQueueName);
         }
     }
 }
