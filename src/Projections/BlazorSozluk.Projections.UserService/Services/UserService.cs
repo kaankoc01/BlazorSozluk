@@ -7,7 +7,7 @@ namespace BlazorSozluk.Projections.UserService.Services
     public class UserService
     {
         private string connStr;
-        
+        //
         public UserService(IConfiguration configuration)
         {
             connStr = configuration.GetConnectionString("SqlServer");

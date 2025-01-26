@@ -10,7 +10,7 @@ namespace BlazorSozluk.Projections.UserService
         private readonly ILogger<Worker> _logger;
         private readonly UserService.Services.UserService userService;
         private readonly EmailService emailService;
-
+        //
         public Worker(ILogger<Worker> logger, UserService.Services.UserService userService, EmailService emailService)
         {
             _logger = logger;
